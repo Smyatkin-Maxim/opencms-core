@@ -171,6 +171,9 @@ public class CmsSetupBean implements I_CmsShellCommands {
     /** DB provider constant for postgresql. */
     public static final String POSTGRESQL_PROVIDER = "postgresql";
 
+    /** DB provider constant for firebird. */
+    public static final String FIREBIRD_PROVIDER = "firebird";
+	
     /** The default component position, is missing. */
     protected static final int DEFAULT_POSITION = 9999;
 
@@ -2033,7 +2036,8 @@ public class CmsSetupBean implements I_CmsShellCommands {
         if (provider.equals(MYSQL_PROVIDER)
             || provider.equals(MSSQL_PROVIDER)
             || provider.equals(DB2_PROVIDER)
-            || provider.equals(AS400_PROVIDER)) {
+            || provider.equals(AS400_PROVIDER)
+            || provider.equals(FIREBIRD_PROVIDER)) {
             database = getReqValue(request, "db");
         } else if (provider.equals(POSTGRESQL_PROVIDER)) {
             database = getReqValue(request, "dbName");
@@ -2042,7 +2046,8 @@ public class CmsSetupBean implements I_CmsShellCommands {
             || provider.equals(MSSQL_PROVIDER)
             || provider.equals(POSTGRESQL_PROVIDER)
             || provider.equals(AS400_PROVIDER)
-            || provider.equals(DB2_PROVIDER)) {
+            || provider.equals(DB2_PROVIDER)
+            || provider.equals(FIREBIRD_PROVIDER)) {
             isFormSubmitted = (isFormSubmitted && (database != null));
         }
 
@@ -2082,7 +2087,8 @@ public class CmsSetupBean implements I_CmsShellCommands {
                 } else if (provider.equals(MYSQL_PROVIDER)
                     || provider.equals(DB2_PROVIDER)
                     || provider.equals(MSSQL_PROVIDER)
-                    || provider.equals(POSTGRESQL_PROVIDER)) {
+                    || provider.equals(POSTGRESQL_PROVIDER)
+                    || provider.equals(FIREBIRD_PROVIDER)) {
                     if (!conStr.endsWith("/")) {
                         conStr += "/";
                     }
@@ -2149,7 +2155,8 @@ public class CmsSetupBean implements I_CmsShellCommands {
                 }
                 if (provider.equals(MYSQL_PROVIDER)
                     || provider.equals(MSSQL_PROVIDER)
-                    || provider.equals(POSTGRESQL_PROVIDER)) {
+                    || provider.equals(POSTGRESQL_PROVIDER)
+                    || provider.equals(FIREBIRD_PROVIDER)) {
                     replacer.put("${database}", database);
                 }
                 if (provider.equals(ORACLE_PROVIDER)) {
@@ -2164,6 +2171,7 @@ public class CmsSetupBean implements I_CmsShellCommands {
                         || provider.equals(ORACLE_PROVIDER)
                         || provider.equals(DB2_PROVIDER)
                         || provider.equals(AS400_PROVIDER)
+                        || provider.equals(FIREBIRD_PROVIDER)
                         || provider.equals(MAXDB_PROVIDER)) {
                         session.setAttribute("createTables", createTables);
                     }

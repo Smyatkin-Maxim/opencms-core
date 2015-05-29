@@ -7,7 +7,7 @@
 	// previous page
 	String prevPage = "../../step_2_check_components.jsp";
 	
-    boolean isFormSubmitted = Bean.setDbParamaters(request, CmsSetupBean.JPA_PROVIDER);
+    boolean isFormSubmitted = Bean.setDbParamaters(request, CmsSetupBean.FIREBIRD_PROVIDER);
 
 %>
 <%= Bean.getHtmlPart("C_HTML_START") %>
@@ -48,7 +48,7 @@ Alkacon OpenCms Setup Wizard
 <%= Bean.getHtmlPart("C_HEAD_END") %>
 
 <% if (Bean.isInitialized()) { %>
-Alkacon OpenCms Setup Wizard - Apache OpenJPA compatible database setup
+Alkacon OpenCms Setup Wizard - <%= Bean.getDatabaseName(Bean.getDatabase()) %> database setup
 <%= Bean.getHtmlPart("C_CONTENT_SETUP_START") %>
 <form method="post" onSubmit="return checkSubmit()" class="nomargin" autocomplete="off">
 
@@ -69,7 +69,11 @@ Alkacon OpenCms Setup Wizard - Apache OpenJPA compatible database setup
 <tr><td style="vertical-align: middle;">
 
 <div class="dialogspacer" unselectable="on">&nbsp;</div>
-<iframe src="database_information.html" name="dbinfo" style="width: 100%; height: 82px; margin: 0; padding: 0; border-style: none;" frameborder="0" scrolling="no"></iframe>
+<% if (Bean.getFullDatabaseKey().contains("_jpa")) { %>
+	<iframe src="database_information_jpa.html" name="dbinfo" style="width: 100%; height: 80px; margin: 0; padding: 0; border-style: none;" frameborder="0" scrolling="no"></iframe>
+<% } else { %>
+	<iframe src="database_information.html" name="dbinfo" style="width: 100%; height: 80px; margin: 0; padding: 0; border-style: none;" frameborder="0" scrolling="no"></iframe>
+<% } %>
 <div class="dialogspacer" unselectable="on">&nbsp;</div>
 
 </td></tr>
